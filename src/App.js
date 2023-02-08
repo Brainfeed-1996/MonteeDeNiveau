@@ -1,10 +1,31 @@
-import "./styles.css";
+import React, { useState } from "react";
 
-export default function App() {
+const App = () => {
+  // Initialiser le niveau et l'expérience
+  const [level, setLevel] = useState(1);
+  const [experience, setExperience] = useState(0);
+
+  // Fonction pour ajouter de l'expérience
+  const handleClick = () => {
+    setExperience(experience + 1);
+  };
+
+  // Fonction pour ajuster le niveau
+  const updateLevel = () => {
+    if (experience >= 100) {
+      setLevel(level + 1);
+      setExperience(0);
+    }
+  };
+
+  updateLevel();
+
   return (
-    <div className="App">
-      <h1>Hello CodeSandbox</h1>
-      <h2>Start editing to see some magic happen!</h2>
+    <div>
+      <h1>Niveau {level}</h1>
+      <div>Expérience {experience}/100</div>
+      <progress value={experience} max={100} />
+      <button onClick={handleClick}>Effectuer une tâche</button>
     </div>
   );
-}
+};
